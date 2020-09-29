@@ -12,6 +12,7 @@ class GitHubInformationTest(unittest.TestCase):
 
     """ Test the github_repo_info function """
 
+
     def test_github_repo_info_1(self):
 
         """ Test a non string input into the function and expect an error """

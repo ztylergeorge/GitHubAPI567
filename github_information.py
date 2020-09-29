@@ -12,14 +12,17 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
 
     """ Read in github username and output the repositories with number of commits """
 
+    #reference HTTPError
     HTTPError: Exception = requests.HTTPError
 
+    #determine if the user_ID is a string
     if not isinstance(user_ID, str):
         raise ValueError(f"{user_ID} is not a string.")
 
     #create repository dictionary and user repository string
     repos_dict: Dict[str: int] = dict() #key: repos value: commit
     user_repos = "https://api.github.com/users/" + user_ID + "/repos"
+    
     #attempt to contact website 
     repos_response = requests.get(user_repos)
     if repos_response.status_code != 200:
@@ -42,8 +45,3 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
                 repos_dict[repos] = len(commits_json_info)
 
     return repos_dict
-    
-    #output results 
-    #print(repos_dict)
-
-#print(github_repo_info("richkempinski"))

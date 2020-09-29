@@ -1,3 +1,8 @@
+"""
+Author: Zach George
+Create test cases for the github_repo_info function
+""""
+
 import unittest 
 import requests
 from github_information import github_repo_info

@@ -13,9 +13,6 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
 
     """ Read in github username and output the repositories with number of commits """
 
-    #reference HTTPError
-    HTTPError: Exception = requests.HTTPError
-
     #determine if the user_ID is a string
     if not isinstance(user_ID, str):
         raise ValueError(f"{user_ID} is not a string.")

@@ -4,8 +4,7 @@ Create test cases for the github_repo_info function
 """
 
 import unittest 
-import requests
-from github_information import github_repo_info
+from github_information import github_repo_info, HTTPError
 
 
 class GitHubInformationTest(unittest.TestCase):
@@ -24,7 +23,7 @@ class GitHubInformationTest(unittest.TestCase):
 
         """ Test a fake user_ID into the function and expect an error """
 
-        with self.assertRaises(requests.HTTPError):
+        with self.assertRaises(HTTPError):
             github_repo_info("this_is_a_fake_id")
 
     def test_github_repo_info_3(self):

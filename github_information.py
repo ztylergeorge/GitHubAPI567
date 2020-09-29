@@ -7,6 +7,7 @@ Output the repository names with the number of commits
 import requests 
 import json
 from typing import Dict
+from requests import HTTPError as HTTPError
 
 def github_repo_info(user_ID: str) -> Dict[str, int]:
 

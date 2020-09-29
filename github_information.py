@@ -36,10 +36,7 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
         for repos in repos_dict.keys():
             commits = "https://api.github.com/repos/" + user_ID + "/" + repos + "/commits"
             commits_response = requests.get(commits)
-            if commits_response.status_code != 200:
-                raise HTTPError(f"{commits} could not be reached.")
-            else:
-                commits_json_info = commits_response.json()
-                repos_dict[repos] = len(commits_json_info)
+            commits_json_info = commits_response.json()
+            repos_dict[repos] = len(commits_json_info)
 
     return repos_dict

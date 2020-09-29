@@ -28,7 +28,7 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
         repos_json_info = repos_response.json()
 
         #take in the name of the repository
-        for i in range(0, len(repos_json_info), 2):
+        for i in range(0, len(repos_json_info)):
             repos_dict[repos_json_info[i]["name"]] = 0
 
         #determine number of commits per repository
@@ -45,3 +45,5 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
     
     #output results 
     #print(repos_dict)
+
+#print(github_repo_info("richkempinski"))

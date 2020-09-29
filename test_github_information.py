@@ -26,7 +26,7 @@ class GitHubInformationTest(unittest.TestCase):
 
         """ Test the richkempinski user_ID and compare to expected keys """
 
-        self.assertEqual(github_repo_info("ztylergeorge").keys(), ['csp', "hellogitworld", "helloworld", "Mocks", 
+        self.assertEqual(github_repo_info("richkempinski").keys(), ['csp', "hellogitworld", "helloworld", "Mocks", 
                                                                     "Project1", "richkempinski.github.io", "threads-of-life",
                                                                     "try_nbdev", "try_nbdev2"])
 

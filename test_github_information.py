@@ -37,7 +37,7 @@ class GitHubInformationTest(unittest.TestCase):
                                 "try_nbdev", "try_nbdev2"]
 
         for i in range(len(github_repos)):
-            self.assertEqual(github_repo_info("richkempinski")[i][0], github_keys[i])
+            self.assertEqual(github_repo_info("richkempinski")[i][0], github_repos[i])
 
     def test_github_repo_info_4(self):
 

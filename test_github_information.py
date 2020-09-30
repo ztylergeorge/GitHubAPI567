@@ -30,22 +30,17 @@ class GitHubInformationTest(unittest.TestCase):
 
     def test_github_repo_info_3(self):
 
-        """ Test the richkempinski user_ID and compare to expected keys """
+        """ Test the richkempinski user_ID and compare to the outputted results """
 
-        github_repos: List[str] = ['csp', "hellogitworld", "helloworld", "Mocks", 
-                                "Project1", "richkempinski.github.io", "threads-of-life",
-                                "try_nbdev", "try_nbdev2"]
-
-        for i in range(len(github_repos)):
-            self.assertEqual(github_repo_info("richkempinski")[i][0], github_repos[i])
-
-    def test_github_repo_info_4(self):
-
-        """ Test the richkempinski user_ID and compare to the expected keys and values """
-
-        self.assertEqual(github_repo_info("richkempinski"), [("csp", 2), ("hellogitworld", 30), ("helloworld", 6), ("Mocks",10), 
-                                                                ("Project1", 2), ("richkempinski.github.io", 9), ("threads-of-life", 1),
-                                                                ("try_nbdev", 2), ("try_nbdev2", 5)])
+        self.assertEqual(github_repo_info("richkempinski"), ["Repo: csp Number of commits: 2", 
+                                                            "Repo: hellogitworld Number of commits: 30", 
+                                                            "Repo: helloworld Number of commits: 6", 
+                                                            "Repo: Mocks Number of commits: 10", 
+                                                            "Repo: Project1 Number of commits: 2", 
+                                                            "Repo: richkempinski.github.io Number of commits: 9", 
+                                                            "Repo: threads-of-life Number of commits: 1",
+                                                            "Repo: try_nbdev Number of commits: 2", 
+                                                            "Repo: try_nbdev2 Number of commits: 5"])
 
 
 if __name__ == "__main__":

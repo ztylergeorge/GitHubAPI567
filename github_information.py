@@ -6,7 +6,7 @@ Output the repository names with the number of commits
 
 import requests 
 import json
-from typing import Dict
+from typing import Dict, List
 from requests import HTTPError as HTTPError
 
 def github_repo_info(user_ID: str) -> Dict[str, int]:
@@ -39,6 +39,10 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
             commits_json_info = commits_response.json()
             repos_dict[repos] = len(commits_json_info)
 
-    return list(repos_dict.items())
+    #create list of items 
+    outputted_list: List[str] = list()
+    for repos in repos_dict.keys():
+        outputted_list.append(f"Repo: {repos} Number of commits: {repos_dict[repos]})
 
-print(github_repo_info("richkempinski"))
+    #output results 
+    return outputted_list

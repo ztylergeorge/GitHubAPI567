@@ -42,7 +42,7 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
     #create list of items 
     outputted_list: List[str] = list()
     for repos in repos_dict.keys():
-        outputted_list.append(f"Repo: {repos} Number of commits: {repos_dict[repos]})
+        outputted_list.append(f"Repo: {repos} Number of commits: {repos_dict[repos]}")
 
     #output results 
     return outputted_list

@@ -39,4 +39,6 @@ def github_repo_info(user_ID: str) -> Dict[str, int]:
             commits_json_info = commits_response.json()
             repos_dict[repos] = len(commits_json_info)
 
-    return repos_dict
+    return list(repos_dict.items())
+
+print(github_repo_info("richkempinski"))

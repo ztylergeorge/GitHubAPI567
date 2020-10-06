@@ -48,6 +48,7 @@ class GitHubInformationTest(unittest.TestCase):
                                 { "name" : "Project1" }, { "name" : "richkempinski.github.io" },\
                                  { "name" : "threads-of-life" }, { "name" : "try_nbdev" }, \
                                      { "name" : "try_nbdev2" } ]')
+                                     
         injectedMock.json.return_value = json_obj
         #info = github_repo_info(self.user_ID)
         self.assertEqual(len(json_obj), len(["Repo: csp Number of commits: 2", 

@@ -58,7 +58,6 @@ def get_repositories(user_ID: str) -> List[str]:
     #attempt to contact website 
     repos_response = requests.get(user_repos)
     if repos_response.status_code != 200:
-        print(repos_response)
         raise HTTPError(f"{user_repos} could not be reached.")
     else:
         repos_json_info = repos_response.json()
@@ -74,10 +73,13 @@ def get_commits_number(user_ID: str, repo_name: str) -> int:
     commits = "https://api.github.com/repos/" + user_ID + "/" + repo_name + "/commits"
     commits_response = requests.get(commits)
 
-    #get json data
-    commits_json_info = commits_response.json()
+    if commits_response != 200:
+        raise HTTPError(f"{commits} could not be reached.")
+    else:
+        #get json data
+        commits_json_info = commits_response.json()
 
     #return length (number of commits)
     return len(commits_json_info)
 
-print(create_repos_commit_formatted_list("richkempinski"))
+#print(create_repos_commit_formatted_list("richkempinski"))

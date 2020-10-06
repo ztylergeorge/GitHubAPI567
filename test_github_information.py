@@ -4,15 +4,17 @@ Create test cases for the github_repo_info function
 """
 
 import unittest 
-from github_information import github_repo_info, HTTPError
+from unittest.mock import MagicMock as Mock
+from unittest.mock import patch 
+from github_information
 from typing import List
+import json
 
 
 class GitHubInformationTest(unittest.TestCase):
 
 
     """ Test the github_repo_info function """
-
 
     def test_github_repo_info_1(self):
 
@@ -28,20 +30,65 @@ class GitHubInformationTest(unittest.TestCase):
         with self.assertRaises(HTTPError):
             github_repo_info("this_is_a_fake_id")
 
-    def test_github_repo_info_3(self):
+    @patch('github_information.requests.get')
+    def test_httperror_repo_info(self, injectedMock):
 
-        """ Test the richkempinski user_ID and compare to the outputted results """
+        """ Test using Mock and fake user ID """
 
-        self.assertEqual(github_repo_info("richkempinski"), ["Repo: csp Number of commits: 2", 
-                                                            "Repo: hellogitworld Number of commits: 30", 
-                                                            "Repo: helloworld Number of commits: 6", 
-                                                            "Repo: Mocks Number of commits: 10", 
-                                                            "Repo: Project1 Number of commits: 2", 
-                                                            "Repo: richkempinski.github.io Number of commits: 9", 
-                                                            "Repo: threads-of-life Number of commits: 1",
-                                                            "Repo: try_nbdev Number of commits: 2", 
-                                                            "Repo: try_nbdev2 Number of commits: 5"])
+        injectedMock.return_value = 404
+        user_ID = "this_is_a_fake_ID" # a known fake user ID
+        with self.assertRaises(HTTPError):
+            github_repo_info(Mock)
 
+    @patch('github_information.requests.get')
+    def test_getting_repo_info(self, injectedMock):
+
+        """ Test using Mock and real user ID """
+
+        injectedMock.return_value = ["Repo: GitHub567 Number of commits: 30", 
+                                "Repo: hello-world Number of commits: 3", 
+                                "Repo: hello_world_SSW567 Number of commits: 1", 
+                                "Repo: SSW_567_Classify_Triangle Number of commits: 2", 
+                                "Repo: Student-Repository Number of commits: 19", 
+                                "Repo: Triangle567 Number of commits: 8"]
+
+      #  json_obj = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+       #                         { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+       #                         { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]')      
+        results: List[Mock] = [Mock(), Mock(), Mock(), Mock(), Mock(), Mock(), Mock()]
+        results[0].json.return_value = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                                { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]') 
+        results[1].json.return_value = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                                { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]') 
+        results[2].json.return_value = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                                { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]') 
+        results[3].json.return_value = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                                { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]') 
+        results[4].json.return_value = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                                { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]') 
+        results[5].json.return_value = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                                { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]') 
+        results[6].json.return_value = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                                { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]') 
+  
+        injectedMock.side_effect = results
+        #injectedMock.user_ID = "ztylergeorge"
+        #info = github_repo_info(self.user_ID)
+        actual = Mock
+        #print(github_repo_info("ztylergeorge"))
+        self.assertEqual(github_repo_info(actual), ["Repo: GitHub567 Number of commits: 30", 
+                                "Repo: hello-world Number of commits: 3", 
+                                "Repo: hello_world_SSW567 Number of commits: 1", 
+                                "Repo: SSW_567_Classify_Triangle Number of commits: 2", 
+                                "Repo: Student-Repository Number of commits: 19", 
+                                "Repo: Triangle567 Number of commits: 8"])
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(verbosity = 2, exit=False)

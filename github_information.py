@@ -1,7 +1,12 @@
 """
 Author: Zach George
 Read in a github username
-Output the repository names with the number of commits 
+Output the repository names with the number of commits
+UPDATE FOR HW5a
+Separated 1 large function into 4 functions: get repositories, get number of commits, 
+get dictionary of repositories and commits, and create formatted list. 
+It was deemed to do this to help better understand mocking, as it was difficult to understand.
+With one large function, it is difficult to grasp due to the multiple function calls and requests, but this made it clearer. 
 """
 
 import requests 
@@ -48,9 +53,13 @@ def get_repositories(user_ID: str) -> List[str]:
 
     """ Get the repositories from a user_ID """
 
+    #check for type of input for user_ID
+    if not isinstance(user_ID, str):
+        raise TypeError(f"{user_ID} is not a string. Please try again")
+
     #determine if the user_ID is a string
     if not isinstance(user_ID, str):
-        raise ValueError(f"{user_ID} is not a string.")
+        raise TypeError(f"{user_ID} is not a string.")
 
     #get url for repository
     user_repos = "https://api.github.com/users/" + user_ID + "/repos"
@@ -68,12 +77,20 @@ def get_repositories(user_ID: str) -> List[str]:
 def get_commits_number(user_ID: str, repo_name: str) -> int:
 
     """ Get the number of commits for a repository """
-    
+
+    #check for type of input for both user_ID and repo_name
+    if not isinstance(user_ID, str):
+        raise TypeError(f"{user_ID} is not a string. Please try again")
+
+    if not isinstance(repo_name, str):
+        raise TypeError(f"{repo_name} is not a string. Please try again.")
+
     #reach the commits from the user_ID and repository name
     commits = "https://api.github.com/repos/" + user_ID + "/" + repo_name + "/commits"
     commits_response = requests.get(commits)
 
-    if commits_response != 200:
+    #check for response
+    if commits_response.status_code != 200:
         raise HTTPError(f"{commits} could not be reached.")
     else:
         #get json data
@@ -81,5 +98,3 @@ def get_commits_number(user_ID: str, repo_name: str) -> int:
 
     #return length (number of commits)
     return len(commits_json_info)
-
-#print(create_repos_commit_formatted_list("richkempinski"))

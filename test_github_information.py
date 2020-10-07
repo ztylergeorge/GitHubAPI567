@@ -57,8 +57,33 @@ class GitHubInformationTest(unittest.TestCase):
         
         mock5.return_value.status_code = 404
         with self.assertRaises(github_information.HTTPError):
-            print(github_information.get_commits_number('Mock', 'Student-Repository'))
-            github_information.get_commits_number('Mock', 'Student-Repository')
+            github_information.get_commits_number('Mock', 'Mock-Repository')
+
+    @patch('github_information.requests.get')
+    def test_get_repositories(self, mock6):
+
+        """ Test the get repositories function """
+
+        mock6.return_value.json.return_value = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                              { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]')
+
+        print(github_information.get_repositories("Mock"))
+
+        expected_values = json.loads('[ { "name" : "GitHubAPI567" }, { "name" : "hello-world" }, \
+                              { "name" : "hello_world_SSW567" }, { "name" : "SSW567_Classify_Triangle" }, \
+                                { "name" : "Student-Repository" }, { "name" : "Triangle567" } ]')
+
+        self.assertEqual(expected_values, github_information.get_repositories("Mock"))
+
+    @patch('github_information.requests.get')
+    def test_get_commits_numbers(self, mock7):
+
+        """ Test the get commits numbers function """
+
+        mock7.return_value.json.return_value = json.loads('[ { " commits ": " test "}]')
+        commits = github_information.get_commits_number("Mock", "Mock-Repos")
+        self.assertEqual(commits, 1)
 
 
 
